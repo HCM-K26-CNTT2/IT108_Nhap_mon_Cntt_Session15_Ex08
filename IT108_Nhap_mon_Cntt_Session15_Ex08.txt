@@ -1,0 +1,75 @@
+﻿Bài 8: Kiểm Tra Vì Sao Dữ Liệu Khách Hàng CampusPay Bị Rò Rỉ Ra Ngoài 
+Phần 1: Phân tích lỗ hổng
+1.
+* Dòng phạm vi là Anyone with the link, quyền cấp là Editor
+* Sự kết hợp Anyone with the link + Editor sẽ tạo ra lỗ hổng bảo mật, nó sẽ bị lan đường link ra bên ngoài, người đc mời sẽ có link và người bên ngoài cũng sẽ có, họ có thể thay đổi ndung và hại chủ đường link đó.
+* Người lạ bấm xin quyền và người chủ link lỡ tay bấm duyệt: Người lạ có link nên gửi yêu cầu cấp quyền truy cập, người chủ link nhận được thông báo qua Gmail và tiện tay bấm nút chấp nhận mà không để ý email người xin.
+
+
+2.
+* File nằm trong một thư mục dùng chung: File này được lưu trong một thư mục đã chia sẻ sẵn cho nhiều người trước đó. Nên dù file được gán cho riêng Email B, người lạ vẫn vào xem được do kế thừa quyền từ thư mục cha.
+
+
+* Email B chia sẻ tiếp cho người lạ: do người gửi link không tắt chế độ phép người chỉnh sửa thay đổi quyền và chia sẻ nên họ có quyền chia sẻ cho người khác.
+
+
+* Nhấn chuột phải vào file chọn Chia sẻ 
+
+
+* Tại mục quyền truy cập chung, đổi từ "Bất kỳ ai có đường liên kết" (Anyone with the link)  sang Hạn chế (Restricted). Xong nhấn ok, là toàn bộ người mà có link cũ nhưng không nằm trong danh sách email được cấp quyền cụ thể sẽ bị chặn truy cập và ko đc vào.
+
+
+
+
+
+
+Tên File
+	Quyền đúng
+	Phạm vi đúng 
+	campuspay_beta_users.xlsx 
+	Editor 
+	Restricted
+	campuspay_api_keys.txt 
+	Viewer
+	Restricted
+	slide_pitch_v9.pptx 
+	Commenter
+	Anyone with the link
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Phần 2: Sửa lỗi & Nghiệm thu
+3.
+* campuspay_beta_users.xlsx: file này chứa dữ liệu người dùng cá nhân nên phải cần để Restricted ,những ai đc mời qua email thì mới có thể vào file này và ko bị lan link ra ngoài 
+
+
+* campuspay_api_keys.txt: có thể có các nội dung cần đc bảo mật nên cần để Restricted vì nó an toàn 100% tránh bị người lạ  chiếm quyền sở hữu.
+
+
+* slide_pitch_v9.pptx: ppt  là bài thuyết trình giới không chứa dữ liệu cần bảo mật nên cài quyền Commenter để người khác vào xem có thể góp ý kiến. Phạm vi Anyone with the link giúp các giáo viên dễ dàng xem và đóng góp ý kiến nhận xét mà không lo bị chỉnh sửa nội dung gốc. 
+
+
+4. Nên dùng Set Expiration Date khi:
+* Làm việc với các đối tác trong thời gian ngắn: chia sẻ tài liệu cho khách hàng theo hợp đồng có thời hạn ngắn.
+* Tránh quên thu hồi quyền: loại bỏ quyền truy cập khi người khác rời dự án nhưng vẫn giữ quyền truy cập tài liệu nội bộ trong nhiều tháng sau đó.
+
+
+* Nên chọn thu hồi thủ công khi:
+* Xảy ra sự cố khẩn cấp: rò rỉ dữ liệu, link bị gửi nhầm nhóm hoặc nhân sự thôi việc đột xuất cần ngắt kết nối ngay lập tức.
